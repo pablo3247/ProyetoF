@@ -17,7 +17,7 @@ public class PartesTareas {
             switch (cod){
                 case "1":
                     System.out.println("Dime el nombre y la fecha de nacimiento:");
-                    addPartesTareas(sc.nextLine(),sc.nextLine());
+                    addPartesTareas( Integer.valueOf(sc.nextLine()),Integer.valueOf(sc.nextLine()));
                     break;
 
                 case "2":
@@ -83,7 +83,7 @@ public class PartesTareas {
 
 
 
-    public static void addPartesTareas(int id_Tareas,String dni) {
+    public static void addPartesTareas(int id_Tareas,int dni) {
         PreparedStatement st = null;
         Connection con = null;
 

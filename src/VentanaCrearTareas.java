@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class VentanaTareas extends JFrame {
+public class VentanaCrearTareas extends JFrame {
 
     private String nameTarea;
     private String Descrip;
@@ -15,7 +15,7 @@ public class VentanaTareas extends JFrame {
 
 
 
-    public VentanaTareas() {
+    public VentanaCrearTareas() {
         setTitle("Crear Nueva Tarea");
         setSize(550, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
