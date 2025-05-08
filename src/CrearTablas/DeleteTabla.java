@@ -8,6 +8,7 @@ public class DeleteTabla {
     public static void main(String[] args) {
 
 
+
         Statement st = null;
         String sql = "DROP TABLE Trabajadores";
 

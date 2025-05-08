@@ -1,10 +1,10 @@
 import java.sql.*;
 import java.util.Scanner;
 
-public class Tareas {
+public class PartesTareas {
 
 
-    public static void selectTarea(){
+    public static void selectPartesTareas(){
 
         Scanner sc = new Scanner(System.in);
 
@@ -17,12 +17,12 @@ public class Tareas {
             switch (cod){
                 case "1":
                     System.out.println("Dime el nombre y la fecha de nacimiento:");
-                    addTarea(sc.nextLine(),sc.nextLine(),sc.nextLine());
+                    addPartesTareas(sc.nextLine(),sc.nextLine());
                     break;
 
                 case "2":
                     System.out.println("Dime la ID del elemento a consultar");
-                    verTarea(Integer.valueOf( sc.nextLine()));
+                    verPartesTareas(Integer.valueOf( sc.nextLine()));
                     break;
 
                 case "3":
@@ -48,7 +48,7 @@ public class Tareas {
 
                     System.out.println("Dime la ID");
                     String id = sc.nextLine();
-                    updateTarea(campo,nuevoValor,Integer.valueOf(id));
+                    updatePartesTareas(campo,nuevoValor,Integer.valueOf(id));
 
                     break;
 
@@ -58,7 +58,7 @@ public class Tareas {
                     String confirmacion = sc.nextLine();
                     if(confirmacion.equals("1")){
                         System.out.println("Dime la ID del autor a eliminar.");
-                        deleteTarea(Integer.valueOf(sc.nextLine()));
+                        deletePartesTareas(Integer.valueOf(sc.nextLine()));
                     }else {
                         System.out.println("OPERACION ANULADA CON EXITO");
                     }
@@ -66,7 +66,7 @@ public class Tareas {
 
                     break;
                 case "5":
-                    verTareas();
+                    verPartesTareases();
                     break;
 
                 default :
@@ -83,20 +83,20 @@ public class Tareas {
 
 
 
-    public static void addTarea(String titulo,String descrip, String fecha) {
+    public static void addPartesTareas(int id_Tareas,String dni) {
         PreparedStatement st = null;
         Connection con = null;
 
-        String sql = "INSERT INTO Tareas(titulo,Descripcion,fechaFinal) VALUES(?,?,?)";
+        String sql = "INSERT INTO Tareas_Trabajadores(id_Tarea,dni,fechaAsignacion) VALUES(?,?,?)";
 
         try {
             con = DatabaseConnection.getConnection();
             st = con.prepareStatement(sql);
 
+            st.setInt(1, id_Tareas);
+            st.setInt(2, dni); 
+            st.setString(3, "Gerente");
 
-            st.setString(1, titulo);
-            st.setString(2, descrip);
-            st.setString(3,fecha);
             st.executeUpdate();
 
         } catch (SQLException ex) {
@@ -123,11 +123,11 @@ public class Tareas {
 
     }
 
-    public static void deleteTarea(int id_autor){
+    public static void deletePartesTareas(int id_autor){
         PreparedStatement st = null;
         Connection con = null;
 
-        String sql = "DELETE FROM Tareas WHERE id_autor = ?";
+        String sql = "DELETE FROM PartesTareases WHERE id_autor = ?";
 
         try {
             con = DatabaseConnection.getConnection();
@@ -159,7 +159,7 @@ public class Tareas {
 
     }
 
-    public static void verTareas(){
+    public static void verPartesTareases(){
 
         Connection con = null;
         Statement st = null;
@@ -168,7 +168,7 @@ public class Tareas {
         try {
             con = DatabaseConnection.getConnection();
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * FROM Tareas");
+            rs = st.executeQuery("SELECT * FROM PartesTareases");
 
             System.out.println("id_autor \tNombre \tFecha_Nacimiento");
             System.out.println("-----------------------------------------");
@@ -210,12 +210,12 @@ public class Tareas {
 
 
     }
-    public static void updateTarea(String campo,String nuevoValor,int id_autor){
+    public static void updatePartesTareas(String campo,String nuevoValor,int id_autor){
         {
             PreparedStatement st = null;
             Connection con = null;
 
-            String sql = "UPDATE Tareas SET "+campo+" = ? WHERE id_autor = ?";
+            String sql = "UPDATE PartesTareases SET "+campo+" = ? WHERE id_autor = ?";
 
             try {
                 con = DatabaseConnection.getConnection();
@@ -252,7 +252,7 @@ public class Tareas {
 
     }
 
-    public static void verTarea(int id_autor){
+    public static void verPartesTareas(int id_autor){
         {
 
             Connection con = null;
@@ -262,7 +262,7 @@ public class Tareas {
             try {
                 con = DatabaseConnection.getConnection();
                 st = con.createStatement();
-                rs = st.executeQuery("SELECT * FROM Tareas where id_autor = '"+id_autor+"'");
+                rs = st.executeQuery("SELECT * FROM PartesTareases where id_autor = '"+id_autor+"'");
 
                 System.out.println("id_autor \tNombre \tFecha_Nacimiento");
                 System.out.println("-----------------------------------------");
